@@ -63,6 +63,8 @@ public class MaquinaController implements ActionListener{
         matrizDeAcao = new MatrizModel(frame.getCampos(), frame.getEstados());
         matrizDeAcao.setMatrizAcoes(frame.getTabelaDeAcao());
         
+        System.out.println(matrizDeAcao.toString());
+        
     }
     
     public void setSettingDefault() throws ExceptionTuring{
@@ -73,12 +75,10 @@ public class MaquinaController implements ActionListener{
     
     public void executarFita () throws ExceptionTuring{
         
-        fitaEntrada = frame.getFita();
-        
+        fitaEntrada = frame.getFita();        
         MaquinaModel maquina = new MaquinaModel(matrizDeAcao, fitaEntrada);
-        
-        
-        
+        maquina.executarAnaliseEmFita();
+                        
     }
     
 }

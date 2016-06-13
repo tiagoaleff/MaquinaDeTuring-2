@@ -27,7 +27,7 @@ import javax.swing.text.MaskFormatter;
 public class MascaraCelulas extends JFrame{
     
     private MaskFormatter celula;
-    private JFormattedTextField celulaFormadata;
+    private JFormattedTextField celulaFormadata;    
     
     public MascaraCelulas () throws ExceptionTuring{
         
@@ -106,8 +106,6 @@ public class MascaraCelulas extends JFrame{
         
         fitaFormatada = new JFormattedTextField(fitaFormato); // adiciona a formacao ao campo        
         return fitaFormatada;
-    }
-        
-    
+    }   
        
 }

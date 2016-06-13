@@ -8,6 +8,7 @@ package br.maquinaDeTuring.model;
 import br.maquinaDeTuring.object.CelulaObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,30 +24,65 @@ public class MaquinaModel {
     public MaquinaModel(MatrizModel matriz, String fita) {
         matrizAcoes = matriz;        
         this.fita = fita;
-        estadoAtual = 0;
+        estadoAtual = 0;             
         
-        //System.out.println(matrizAcoes.toString());
-        //System.out.println(this.fita);                
+        //this.fita  += "►";
     }
     
     
     public void executarAnaliseEmFita() {
         
-        CelulaObject acao;
-        boolean fimDePrograma = false;
+        CelulaObject acao;        
+        boolean fimDePrograma = true;
         int posicaoAtualFita = 0;
+                       
+        acao = matrizAcoes.getAcao(String.valueOf(fita.charAt(0)), estadoAtual);        
+                
+        String novoSimboloString = "";
+        String auxilixarString = "";
         
         while (fimDePrograma) {        
                         
-            acao = matrizAcoes.getAcao(fita.substring(posicaoAtualFita, posicaoAtualFita + 1), 
-                    estadoAtual);
-            
-            System.out.println(acao.toString());
-            
-            System.exit(0);
-            
+            if (acao.isFimPrograma()) {
+                fimDePrograma = false;
+                System.out.println("fim do programa");
+                break;
+            }
+            novoSimboloString = acao.getSimbolo();
+            estadoAtual = acao.getEstadoDestino();            
+            fita = getNovaFita(novoSimboloString, posicaoAtualFita);                                    
+            posicaoAtualFita = getPosicao(acao.getDirecao(), posicaoAtualFita);                        
+                                                                     
         }
         
+        System.out.println(fita);
+        JOptionPane.showMessageDialog(null, "fim do programa");
+        
+    }
+    
+    public String getNovaFita(String novoSimboloString, int posicao) {
+        
+        String auxiliar = "";
+        
+        for (int i = 0; i < fita.length(); i++) {
+            
+            if (i != posicao) {
+                auxiliar += String.valueOf(fita.charAt(i));
+            } else {
+                auxiliar += novoSimboloString;
+            }
+                        
+        }
+        
+        return auxiliar;        
+    }
+                    
+    public int getPosicao(String direcao, int posicao) {
+        
+        if (direcao.equals("Direita")) {
+            return ++posicao;
+        }
+        return --posicao;
     }
                   
 }

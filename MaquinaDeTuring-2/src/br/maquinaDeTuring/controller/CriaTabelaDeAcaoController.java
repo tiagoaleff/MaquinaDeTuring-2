@@ -6,6 +6,7 @@
 package br.maquinaDeTuring.controller;
 
 import br.maquinaDeTuring.exception.ExceptionTuring;
+import br.maquinaDeTuring.object.CelulaObject;
 import br.maquinaDeTuring.object.MascaraCelulas;
 import br.maquinaDeTuring.view.MaquinaDeTuringView;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,7 @@ public class CriaTabelaDeAcaoController implements ActionListener{
         String  action = e.getActionCommand();
                 
         switch (action) {
-            
+             
             case "gerarColunasEstados" :
                 try {
                  definirColunasEstados();                      
@@ -96,11 +97,10 @@ public class CriaTabelaDeAcaoController implements ActionListener{
     
     private void gerarTabelaDeAcao() throws ExceptionTuring{
         
-        String [] simbolos = new String[numeroDeColunas + 2];      
+        String [] simbolos = new String[numeroDeColunas + 3];      
         ArrayList<String> simbolosEntrada = frame.getCampos();
-        //Inicial: ►"
-        //int [] estados = new int [];
-        
+        Collections.sort(simbolosEntrada);
+            
         int i = 1;                             
         simbolos[0] = "►";
         
@@ -110,7 +110,8 @@ public class CriaTabelaDeAcaoController implements ActionListener{
             ++i;                        
             
         }          
-        
+                
+                        
         String [] cabecalhoTabela = {"Estados", "Ler", "Próximo Estado",
                                         "Escrever", "Direção"};
         
@@ -125,7 +126,9 @@ public class CriaTabelaDeAcaoController implements ActionListener{
                         }
                                                 
                         return true;
-                    }                    
+                    }        
+                    
+                    
                 };
         
         frame.getTabelaDeAcao().setModel(defaultTable);
@@ -152,14 +155,25 @@ public class CriaTabelaDeAcaoController implements ActionListener{
         String [] direcaoString = {"Direita", "Esquerda"};        
         JComboBox leituraEscrita = new JComboBox(simbolos);
         JComboBox direcao = new JComboBox(direcaoString);
+        JComboBox estados;
+        
+        
+        // configura o estado destino
+        String [] numeroDeEstadosArray = new String[numeroDeEstados + 1];
+                        
+        for (int i = 0; i < numeroDeEstados; i++) {
+            numeroDeEstadosArray[i] = String.valueOf(i);
+        }
+        
+        numeroDeEstadosArray[numeroDeEstados] = "■";        
+        estados = new JComboBox(numeroDeEstadosArray);
         
         // configura o valor das linhas
         int row = tabelaEstados.getRowCount();
         int j = 0;
         int x = 0;
         int numeroDeEstado = 0;
-        for (int i = 0; i < row; i++) {
-         
+        for (int i = 0; i < row; i++) {         
             
             
             tabelaEstados.setValueAt(numeroDeEstado, i, 0); // configura o numero do estado
@@ -172,17 +186,10 @@ public class CriaTabelaDeAcaoController implements ActionListener{
                 j = 0;
             }
             x++;
-            if ( x == numeroDeColunas){
-                //numeroDeEstado++;
+            if ( x == numeroDeColunas){                
                 x = 0;
             }                                                                           
-        }
-        
-        for (int i = 0; i < row; i++) {
-            
-            
-            
-        }
+        }                
 
         // configura as colunas
         int totalDeColunas = tabelaEstados.getColumnCount();               
@@ -190,17 +197,16 @@ public class CriaTabelaDeAcaoController implements ActionListener{
             
             TableColumn col = tabelaEstados.getColumnModel().getColumn(i);                                                
             
+             if (i == 2) {
+                col.setCellEditor(new DefaultCellEditor(estados));  
+            }
             if (i == 3) {
                 col.setCellEditor(new DefaultCellEditor(leituraEscrita));  
             }
             
              if (i == 4) {
                 col.setCellEditor(new DefaultCellEditor(direcao));  
-            }
-            /*if (i != 0) {
-                
-                col.setCellEditor(new DefaultCellEditor(celulaFormadata));  
-            } */           
+            }            
                  
         }
             

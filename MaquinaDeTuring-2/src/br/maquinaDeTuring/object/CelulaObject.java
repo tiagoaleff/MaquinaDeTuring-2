@@ -11,48 +11,93 @@ package br.maquinaDeTuring.object;
  */
 public class CelulaObject {
     
-    private char simbolo; // simbolo que será gravado na fina
-    private char estadoDestino; // estado que será direcionado a máquino 
-    private char direcao; // lado que será lido na tabela
+    private String simbolo; // simbolo que será gravado na fina
+    private String estadoDestino; // estado que será direcionado a máquino 
+    private String direcao; // lado que será lido na tabela    
+    private boolean fimPrograma; // variavel testa se o programa acabou
+    
 
-    public char getSimbolo() {
-        if (simbolo != ' ') 
-            return simbolo;
-        return ' ';
+    public CelulaObject() {        
+        fimPrograma = false;
+        simbolo = "";
+        estadoDestino = "0";
+        direcao = "";                
+    }
+        
+    public String getSimbolo() {
+        if (simbolo == null || simbolo.trim().equals(""))             
+            return "";
+        return simbolo;
     }
 
-    public void setSimbolo(char simbolo) {
-        this.simbolo = simbolo;
+    public void setSimbolo(String simbolo) {
+                
+        if (simbolo == null) {
+            return;
+        }
+        this.simbolo = simbolo;                    
+        
     }
 
-    public char getEstadoDestino() {
-        if (estadoDestino != ' ') 
-            return estadoDestino;
-        return ' ';
+    public int getEstadoDestino() {
+        
+        if (estadoDestino == null || estadoDestino.trim().equals(""))     
+            return 0;
+        
+        if (isFimPrograma()) {
+            return 0;
+        }
+        
+        return Integer.parseInt(estadoDestino);        
     }
 
-    public void setEstadoDestino(char estadoDestino) {
-        this.estadoDestino = estadoDestino;
+    public void setEstadoDestino(String estadoDestino) {
+        
+        if (estadoDestino != null) 
+            this.estadoDestino = estadoDestino;
+                        
+        if (estadoDestino.equals("■")) {
+            this.estadoDestino = "";
+            setFimPrograma("fim");
+        } 
     }
 
-    public char getDirecao() {
-        if (direcao != ' ') 
-            return direcao;
-        return ' ';
+    public String getDirecao() {
+        
+        if (direcao == null || direcao.trim().equals(""))         
+            return " ";    
+        return direcao;
     }
 
-    public void setDirecao(char direcao) {
+    public void setDirecao(String direcao) {
                 
         this.direcao = direcao;
     }
     
     public CelulaObject getCelula(){
+        
+        if (this == null) 
+            return null;
         return this;
+    }        
+
+    public boolean isFimPrograma() {
+        return fimPrograma;
     }
+
+    public void setFimPrograma(String fim) {
+        
+        fimPrograma = false;
+        
+        if (fim.equals("fim")) {
+            fimPrograma = true;
+        }        
+    }
+            
     
     @Override
     public String toString(){
-        return String.format("Direção: %c. Simbolo: %c. Estado: %c", 
+        return String.format("Direção: %s. Simbolo: %s. Estado: %s", 
                 getDirecao(), getSimbolo(), getEstadoDestino());
     }
             

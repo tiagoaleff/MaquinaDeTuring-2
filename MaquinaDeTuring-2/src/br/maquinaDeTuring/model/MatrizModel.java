@@ -8,6 +8,7 @@ package br.maquinaDeTuring.model;
 import br.maquinaDeTuring.object.CelulaObject;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -29,47 +30,78 @@ public class MatrizModel {
     
     public void setMatrizAcoes(JTable tabelaDeAcoes) {
         
-        // numeros de linhas superior
-        int linhasColunas = listaSimbolos.size() + 1; // + 1 porcausa do simbolo inicial
-
-        CelulaObject celula;
-        matrizDeAcoes = new CelulaObject[totalEstados][linhasColunas];
-                      
-        int totalDeColunas = tabelaDeAcoes.getColumnCount();        
-        linhasColunas++;
-        // adiciona os valores da tabela na matriz
-        for (int i = 0; i < totalEstados; i ++) {
+        int tamanhoDeListaDeSimbolos = listaSimbolos.size() + 1; // simbolo inicial somando
+        CelulaObject celula = new CelulaObject(); // armazeno o valor dos campo das matriz
+        
+        //1- tamanho das linhas 2 - numero de colunas                
+        matrizDeAcoes = new CelulaObject[totalEstados][tamanhoDeListaDeSimbolos];        
+        
+        // tabela do usuario
+        int linhas = tabelaDeAcoes.getRowCount();
+        int colunas = tabelaDeAcoes.getColumnCount();
+        
+        int linhaMatriz = 0;
+        int colunaMatriz = 0;
+                                        
+        for (int i = 0; i < linhas; i++) {
             
-            for (int j = 1; j < linhasColunas; j ++) {
-                                             
-                celula = formatarCampoComMascara( 
-                        String.valueOf(tabelaDeAcoes.getValueAt(i, j)));
+            for (int j = 0; j < colunas; j++) {
+                                
+                /*celula.setEstadoDestino("");
+                celula.setDirecao("");
+                celula.setSimbolo("");                
+                matrizDeAcoes[linhaMatriz][colunaMatriz] = celula;                       
+                */
+                if (j == 2) {                    
+                    celula.setEstadoDestino(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));                    
+                }
                 
-                System.out.println(celula.toString());
-                System.out.printf("i: %d - j: %d", i, j);
-                System.out.println("");
+                if (j == 3) {
+                    
+                    celula.setSimbolo(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));
+                }
                 
-                matrizDeAcoes[i][j - 1] = celula;                                              
+                if (j == 4) {
+                    
+                    celula.setDirecao(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));                    
+                                        
+                    if (colunaMatriz >= (tamanhoDeListaDeSimbolos - 1)) {
+                        
+                        matrizDeAcoes[linhaMatriz][colunaMatriz] = celula;                        
+                        colunaMatriz = 0;
+                        linhaMatriz++;
+                       
+                        
+                    } else {
+                       
+                        matrizDeAcoes[linhaMatriz][colunaMatriz] = celula;                       
+                        colunaMatriz++;
+                    }
+                    
+                    celula = new CelulaObject();
+                }                                   
             }
-                                         
-        }                            
+        }                                                              
     }
     
     public CelulaObject getAcao (String simboloEntrada, int estado) {
         
-        CelulaObject celula = new CelulaObject();
+        CelulaObject celula = new CelulaObject();        
+        listaSimbolos.add(0, "►");
+        int coluna = listaSimbolos.indexOf(simboloEntrada);
         
-        int coluna = listaSimbolos.lastIndexOf(simboloEntrada);
-        
-        
-        
-        if (matrizDeAcoes[coluna][estado] == null) {
+        /*for (String i : listaSimbolos) {            
+            System.out.println(i);
+        }*/
+                                        
+        if (matrizDeAcoes[estado][coluna] == null) {
             
             System.out.println("Posicao nao existe");
             System.exit(0);
             
-        }        
-        matrizDeAcoes[coluna][estado].getCelula();
+        }
+                
+        celula = matrizDeAcoes[estado][coluna].getCelula();        
         return celula;
     }
     
@@ -83,7 +115,7 @@ public class MatrizModel {
                                     
             for (CelulaObject i : t) {
                 
-                System.out.printf("%c - %c - %c \t" ,
+                System.out.printf("%s - %s - %s \t" ,
                         i.getDirecao(), i.getSimbolo(), i.getEstadoDestino());                                                
             }                           
             System.out.println();
@@ -92,17 +124,8 @@ public class MatrizModel {
         return toString;        
     }
     
-    public CelulaObject formatarCampoComMascara(String campo) {
-                       
-       // System.out.println("teste");
-        CelulaObject celula = new CelulaObject();        
-                
-        celula.setDirecao(campo.charAt(0));
-        celula.setSimbolo(campo.charAt(4));
-        celula.setEstadoDestino(campo.charAt(8));            
-       
-        return celula;
-        
-    }    
-        
+    public CelulaObject[][] getMatriz(){
+        return matrizDeAcoes;
+    }
+              
 }
