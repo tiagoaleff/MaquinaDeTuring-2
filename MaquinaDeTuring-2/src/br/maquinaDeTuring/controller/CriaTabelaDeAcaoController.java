@@ -12,8 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -72,7 +76,7 @@ public class CriaTabelaDeAcaoController implements ActionListener{
     public void definirColunasEstados () throws ExceptionTuring{
 
         numeroDeEstados = frame.getEstados();
-        numeroDeColunas = frame.getCampos().size();
+        numeroDeColunas = frame.getCampos().size() + 1;
 
         gerarTabelaDeAcao();                       
     }
@@ -92,64 +96,123 @@ public class CriaTabelaDeAcaoController implements ActionListener{
     
     private void gerarTabelaDeAcao() throws ExceptionTuring{
         
-        String [] campoTabela = new String[numeroDeColunas + 2];      
+        String [] simbolos = new String[numeroDeColunas + 2];      
         ArrayList<String> simbolosEntrada = frame.getCampos();
-        Collections.sort(simbolosEntrada);
-        int i = 2;
-                
-        campoTabela[0] = "Estados";       
-        campoTabela[1] = "Inicial: ►";
+        //Inicial: ►"
+        //int [] estados = new int [];
+        
+        int i = 1;                             
+        simbolos[0] = "►";
         
         for (String iList : simbolosEntrada) {
                           
-            campoTabela[i] = iList;
+            simbolos[i] = iList;
             ++i;                        
             
         }          
         
-        try {                        
-
-            DefaultTableModel defaultTable = 
-                new DefaultTableModel(campoTabela, numeroDeEstados){
+        String [] cabecalhoTabela = {"Estados", "Ler", "Próximo Estado",
+                                        "Escrever", "Direção"};
+        
+        DefaultTableModel defaultTable = 
+                new DefaultTableModel(cabecalhoTabela, numeroDeEstados * numeroDeColunas){
+                
                     @Override
                     public boolean isCellEditable(int row, int column) {
 
-                        if (column == 0) {
+                        if (column == 0 || column == 1) {
                             return false;                                
                         }
+                                                
                         return true;
                     }                    
                 };
-           
-            frame.getTabelaDeAcao().setModel(defaultTable);            
-            // formata novas celulas da tabela
-            formatarCelularTabela = new MascaraCelulas();
-            formatarCelularTabela.formatCell(frame.getTabelaDeAcao());
-                    
-            int numeroEstado = 1;           
+        
+        frame.getTabelaDeAcao().setModel(defaultTable);
+        formatCell(simbolos);
+        
+        int numeroEstado = 1;
+        
+        for (int col = 1; col < numeroDeColunas; col ++) {
             
-            for (int linha = 0; linha < (numeroDeEstados); linha ++) {
-                            
-                defaultTable.setValueAt(linha, linha, 0); // Estados =  Dividir o numero delinhas por colunas
-                ++numeroEstado;                                   
+            for (int line = 0; line < numeroDeEstados; line ++) {                                
+                
+                defaultTable.isCellEditable(line, col);
                 
             }
             
-            // torna as celulas etivateis
-            for (int col = 1; col < numeroDeColunas; col ++) {
-                                
-                    for (int line = 0; line < numeroDeEstados; line ++) {
-                    
-                        defaultTable.isCellEditable(line, col);
-                            
-                    }                                
-                
-            }
-            
-            frame.getTabelaDeAcao().setModel(defaultTable);
-            
-        } catch (ExceptionTuring e) {
-            throw new ExceptionTuring("Erro configurar tabela");
-        }              
+        }
+        frame.getTabelaDeAcao().setModel(defaultTable);              
     }    
+    
+    public void formatCell (String [] simbolos) {
+    
+        JTable tabelaEstados = frame.getTabelaDeAcao();
+        
+        String [] direcaoString = {"Direita", "Esquerda"};        
+        JComboBox leituraEscrita = new JComboBox(simbolos);
+        JComboBox direcao = new JComboBox(direcaoString);
+        
+        // configura o valor das linhas
+        int row = tabelaEstados.getRowCount();
+        int j = 0;
+        int x = 0;
+        int numeroDeEstado = 0;
+        for (int i = 0; i < row; i++) {
+         
+            
+            
+            tabelaEstados.setValueAt(numeroDeEstado, i, 0); // configura o numero do estado
+            tabelaEstados.setValueAt(simbolos[x], i, 1);
+            
+            System.out.println(numeroDeEstado);
+            j++;  
+            if ( j == numeroDeColunas){
+                numeroDeEstado++;
+                j = 0;
+            }
+            x++;
+            if ( x == numeroDeColunas){
+                //numeroDeEstado++;
+                x = 0;
+            }                                                                           
+        }
+        
+        for (int i = 0; i < row; i++) {
+            
+            
+            
+        }
+
+        // configura as colunas
+        int totalDeColunas = tabelaEstados.getColumnCount();               
+        for (int i = 0; i < totalDeColunas; i ++) {
+            
+            TableColumn col = tabelaEstados.getColumnModel().getColumn(i);                                                
+            
+            if (i == 3) {
+                col.setCellEditor(new DefaultCellEditor(leituraEscrita));  
+            }
+            
+             if (i == 4) {
+                col.setCellEditor(new DefaultCellEditor(direcao));  
+            }
+            /*if (i != 0) {
+                
+                col.setCellEditor(new DefaultCellEditor(celulaFormadata));  
+            } */           
+                 
+        }
+            
+        int totalDeLinhas = tabelaEstados.getRowCount();
+        
+        // configura a largura das linhas
+        for (int i = 0; i < totalDeLinhas; i ++) {
+            
+            tabelaEstados.setRowHeight(i, 35);
+            
+        }
+         
+    }
+    
 }

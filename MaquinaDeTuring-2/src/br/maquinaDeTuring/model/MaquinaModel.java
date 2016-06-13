@@ -25,10 +25,8 @@ public class MaquinaModel {
         this.fita = fita;
         estadoAtual = 0;
         
-        System.out.println(matrizAcoes.toString());
-        System.out.println(this.fita);
-        
-        
+        //System.out.println(matrizAcoes.toString());
+        //System.out.println(this.fita);                
     }
     
     

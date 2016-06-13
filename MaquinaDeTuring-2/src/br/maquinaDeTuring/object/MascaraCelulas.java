@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.text.ParseException;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -43,18 +44,40 @@ public class MascaraCelulas extends JFrame{
     /*
         Formata celulas das colunas. Cria mascara e altura
     */
-    public void formatCell (JTable tabelaEstados) {
+    public void formatCell (JTable tabelaEstados, String [] simbolos) {
+    
+        /*TableColumn teste;
+        
+        String [] direcaoString = {"Direita", "Esquerda"};        
+        JComboBox leituraEscrita = new JComboBox(simbolos);
+        JComboBox direcao = new JComboBox(direcaoString);
+        
+        // configura o valor das linhas
+        int row = tabelaEstados.getRowCount();
+        
+        for (int i = 0; i < row; i++) {
                         
-        int totalDeColunas = tabelaEstados.getColumnCount();
-               
+        
+            
+        }
+
+        // configura as colunas
+        int totalDeColunas = tabelaEstados.getColumnCount();               
         for (int i = 0; i < totalDeColunas; i ++) {
             
-            if (i != 0) {
-                // obtem celula por celula
-                TableColumn col = tabelaEstados.getColumnModel().getColumn(i);
-                // adiciona a mascara ao campo da coluna
+            TableColumn col = tabelaEstados.getColumnModel().getColumn(i);                                                
+            
+            if (i == 3) {
+                col.setCellEditor(new DefaultCellEditor(leituraEscrita));  
+            }
+            
+             if (i == 4) {
+                col.setCellEditor(new DefaultCellEditor(direcao));  
+            }
+            /*if (i != 0) {
+                
                 col.setCellEditor(new DefaultCellEditor(celulaFormadata));  
-            }            
+            } 
                  
         }
             
@@ -65,7 +88,7 @@ public class MascaraCelulas extends JFrame{
             
             tabelaEstados.setRowHeight(i, 35);
             
-        }
+        }*/
          
     }
     
