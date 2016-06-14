@@ -22,6 +22,7 @@ public class MaquinaController implements ActionListener{
     private MatrizModel matrizDeAcao;
     private MaquinaDeTuringView frame;
     private String fitaEntrada; // obtem o valor da fita    
+    private MaquinaModel maquina;
     
     public MaquinaController (MaquinaDeTuringView frame) {
         this.frame = frame;
@@ -67,20 +68,16 @@ public class MaquinaController implements ActionListener{
         
     }
     
-    public void setSettingDefault() throws ExceptionTuring{
+    public void setSettingDefault() throws ExceptionTuring {
         salvarMatrizDeAcao();
-    }
+    }    
     
-
-    
-    public void executarFita () throws ExceptionTuring{
-        
+    public synchronized void executarFita () throws ExceptionTuring {        
         fitaEntrada = frame.getFita();        
-        MaquinaModel maquina = new MaquinaModel(matrizDeAcao, fitaEntrada, frame);
-        maquina.executarAnaliseEmFita();
-                        
-    }
-    
+        maquina = new MaquinaModel(matrizDeAcao, fitaEntrada, frame);                               
+        maquina.run();
+        
+    }        
     
     
 }

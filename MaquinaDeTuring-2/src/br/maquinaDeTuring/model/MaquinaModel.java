@@ -7,14 +7,16 @@ package br.maquinaDeTuring.model;
 
 import br.maquinaDeTuring.object.CelulaObject;
 import br.maquinaDeTuring.view.MaquinaDeTuringView;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author tiagoaleff
  */
-public class MaquinaModel {
+public class MaquinaModel implements Runnable{
     
     private String fita; // fita inserida pelo usuario
     private ArrayList<String> historicoEstados; // mostra de forma tabular as estados percorridos (q1, $) -> (d,D,4)
@@ -26,12 +28,24 @@ public class MaquinaModel {
         matrizAcoes = matriz;        
         this.fita = fita;
         estadoAtual = 0;                 
-        this.frame = frame;
+        this.frame = frame;                        
     }
     
     
-    public void executarAnaliseEmFita() {
+    @Override
+    public void run() {
+     
+        try {
+            executarAnaliseEmFita();
+        } catch (InterruptedException ex) {
+            JOptionPane.showMessageDialog(frame, ex.getMessage());
+        }
         
+    }
+    
+    
+    public synchronized void executarAnaliseEmFita() throws InterruptedException {
+                            
         CelulaObject acao = new CelulaObject();        
         boolean fimDePrograma = true;        
         
@@ -43,8 +57,12 @@ public class MaquinaModel {
         String auxilixarString = "";
         String direcaoString = "";
         int posicaoAtualFita = 0;
-        String historico = ""; // (estado lido, simbolo lido) -> (estado destino, simbolo gravado, direcao)
-               
+        String historico = ""; // (estado lido, simbolo lido) -> (estado destino, simbolo gravado, direcao)                                      
+     
+        for (Component  i :frame.getComponents()) {
+            i.repaint();
+        }        
+                
         while (!acao.isFimPrograma()) {        
                                              
             
@@ -61,23 +79,34 @@ public class MaquinaModel {
             int auxiliarPosicao = posicaoAtualFita; // para que seja possivel inserir no historico            
             String auxiliarCaracterFita = getCaracterFita(posicaoAtualFita);
             getNovaFita(novoSimboloString, posicaoAtualFita); // atualiza a fita                                    
-            setFitaView();
+            //setFitaView();
             System.out.println("valor da coluna: " + getCaracterFita(posicaoAtualFita) + " linha: " + estadoAtual);
                         
             posicaoAtualFita = getPosicao(acao.getDirecao(), posicaoAtualFita); // atualiza a variavel antes de obter na matriz
             acao = matrizAcoes.getAcao(getCaracterFita(posicaoAtualFita), estadoAtual); // obtem a nova acao                                    
-            System.out.println("final: " + fita);                       
+            System.out.println("final: " + fita);                               
+            
+            setFitaView();
             setHistoricoEstadosView(auxiliarCaracterFita, posicaoAtualFita, acao.getEstadoDestino(), acao.getDirecao(), acao.isFimPrograma());
+            
+            try {                                
+                Thread.sleep(3 * 1000);    
+                frame.repaint();
+            } catch (InterruptedException e) {
+                throw new InterruptedException();
+            }
+            
+                        
         }
         
-        
-        JOptionPane.showMessageDialog(null, fita);        
+        //JOptionPane.showMessageDialog(null, fita);        
         
     }
     
     
     public void setHistoricoEstadosView(String auxiliarCaracterFita, int posicaoAtualFita, int novoEstado,
-            String novaDirecao, boolean fimDePrograma) {
+        
+        String novaDirecao, boolean fimDePrograma) {
         
         String historico = "";
         
@@ -132,8 +161,23 @@ public class MaquinaModel {
         return --posicao;
     }
     
-    public void setFitaView () {
-        frame.setFitaView(fita);
+    public void set(String fita){
+        MaquinaDeTuringView.setFitaView(fita);
+    }
+    
+    public synchronized void setFitaView () {     
+        
+        MaquinaDeTuringView.setFitaView(fita);
+    }
+    
+    public void imprimirCampos () {
+        
+        /*for (JFormattedTextField i : MaquinaDeTuringView.getListaFields()) {
+            
+            System.out.println(i.getText());
+            
+        }*/
+        
     }
                   
 }

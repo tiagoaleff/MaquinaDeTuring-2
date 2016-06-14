@@ -5,12 +5,12 @@
  */
 package br.maquinaDeTuring.view;
 
+import br.maquinaDeTuring.thread.Temporizador;
 import br.maquinaDeTuring.controller.CriaTabelaDeAcaoController;
 import br.maquinaDeTuring.controller.MaquinaController;
 import br.maquinaDeTuring.exception.ExceptionTuring;
 import br.maquinaDeTuring.object.MascaraCelulas;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
@@ -25,13 +25,15 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private CriaTabelaDeAcaoController action = 
             new CriaTabelaDeAcaoController(this);    
     private MaquinaController actionMaquina = new MaquinaController(this);
+    private static ArrayList<JFormattedTextField> listaFieds = new ArrayList<>();
    
         
     /**
      * Creates new form Tela
      */
-    public MaquinaDeTuringView() {
+    public MaquinaDeTuringView() {        
         initComponents();        
+        getListaFields();
     }
 
     /**
@@ -59,7 +61,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         limparjButton2 = new javax.swing.JButton();
         salvarjButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        testeJPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         executarFitajButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -234,7 +236,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Tabela de Ações", jPanel4);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Execução da Fita"));
+        testeJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Execução da Fita"));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Inserir Entrada na Fita:");
@@ -258,49 +260,28 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
             }
         });
 
-        umjFormattedTextField1.setEditable(false);
         umjFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
-        tresjFormattedTextField2.setEditable(false);
-
-        doisjFormattedTextField3.setEditable(false);
         doisjFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doisjFormattedTextField3ActionPerformed(evt);
             }
         });
 
-        seisjFormattedTextField4.setEditable(false);
-
-        cincojFormattedTextField5.setEditable(false);
-
-        quatrojFormattedTextField6.setEditable(false);
         quatrojFormattedTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quatrojFormattedTextField6ActionPerformed(evt);
             }
         });
 
-        novejFormattedTextField7.setEditable(false);
         novejFormattedTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novejFormattedTextField7ActionPerformed(evt);
             }
         });
 
-        oitojFormattedTextField8.setEditable(false);
-
-        dozejFormattedTextField9.setEditable(false);
-
-        onzejFormattedTextField10.setEditable(false);
-
-        dezjFormattedTextField11.setEditable(false);
-
-        setejFormattedTextField12.setEditable(false);
-
         jFormattedTextField13.setText("jFormattedTextField1");
 
-        trezejFormattedTextField14.setEditable(false);
         trezejFormattedTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trezejFormattedTextField14ActionPerformed(evt);
@@ -340,25 +321,25 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 37, Short.MAX_VALUE)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout testeJPanelLayout = new javax.swing.GroupLayout(testeJPanel);
+        testeJPanel.setLayout(testeJPanelLayout);
+        testeJPanelLayout.setHorizontalGroup(
+            testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(testeJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(testeJPanelLayout.createSequentialGroup()
+                        .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(testeJPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,9 +347,9 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addGroup(testeJPanelLayout.createSequentialGroup()
+                                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(testeJPanelLayout.createSequentialGroup()
                                         .addComponent(umjFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(doisjFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,8 +357,8 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                                         .addComponent(tresjFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(executarFitajButton3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(testeJPanelLayout.createSequentialGroup()
                                         .addComponent(quatrojFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cincojFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,16 +366,16 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                                         .addComponent(seisjFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(testeJPanelLayout.createSequentialGroup()
                                         .addComponent(jButton4)
                                         .addGap(21, 21, 21)
                                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
+                                    .addGroup(testeJPanelLayout.createSequentialGroup()
                                         .addComponent(setejFormattedTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(oitojFormattedTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,7 +389,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                                         .addComponent(dozejFormattedTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(trezejFormattedTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(480, 480, 480)
                         .addComponent(jFormattedTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -416,9 +397,9 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                     .addComponent(fitajFormattedTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        testeJPanelLayout.setVerticalGroup(
+            testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(testeJPanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -428,9 +409,9 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(umjFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(doisjFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tresjFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -446,19 +427,19 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                         .addComponent(jFormattedTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(trezejFormattedTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(testeJPanelLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(testeJPanelLayout.createSequentialGroup()
+                        .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(executarFitajButton3)
                             .addComponent(jButton5)
                             .addComponent(jButton4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(testeJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jButton1)
@@ -475,14 +456,14 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(testeJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(testeJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -542,14 +523,6 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_novejFormattedTextField7ActionPerformed
 
-    private void quatrojFormattedTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quatrojFormattedTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quatrojFormattedTextField6ActionPerformed
-
-    private void doisjFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doisjFormattedTextField3ActionPerformed
-               // TODO add your handling code here:
-    }//GEN-LAST:event_doisjFormattedTextField3ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -557,6 +530,14 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void quatrojFormattedTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quatrojFormattedTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quatrojFormattedTextField6ActionPerformed
+
+    private void doisjFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doisjFormattedTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doisjFormattedTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,42 +619,50 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     
     
     
-    public ArrayList<JFormattedTextField> getListaFields () {
-        ArrayList<JFormattedTextField> listaFieds = new ArrayList<>();
+    //public static ArrayList<JFormattedTextField> getListaFields () {
+    public static void getListaFields () {
+                
         
-        listaFieds.add(umjFormattedTextField1);
-        listaFieds.add(doisjFormattedTextField3);
-        listaFieds.add(tresjFormattedTextField2);
-        listaFieds.add(quatrojFormattedTextField6);
-        listaFieds.add(cincojFormattedTextField5);
-        listaFieds.add(seisjFormattedTextField4);
-        listaFieds.add(setejFormattedTextField12);
-        listaFieds.add(oitojFormattedTextField8);
-        listaFieds.add(novejFormattedTextField7);
-        listaFieds.add(dezjFormattedTextField11);
-        listaFieds.add(dozejFormattedTextField9);
-        listaFieds.add(tresjFormattedTextField2);
+        MaquinaDeTuringView.listaFieds = new ArrayList<>();
+        
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.umjFormattedTextField1);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.doisjFormattedTextField3);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.tresjFormattedTextField2);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.quatrojFormattedTextField6);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.cincojFormattedTextField5);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.seisjFormattedTextField4);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.setejFormattedTextField12);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.oitojFormattedTextField8);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.novejFormattedTextField7);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.dezjFormattedTextField11);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.dozejFormattedTextField9);
+        MaquinaDeTuringView.listaFieds.add(MaquinaDeTuringView.tresjFormattedTextField2);                          
 
+
+        //return MaquinaDeTuringView.listaFieds;
         
-        return listaFieds;
     }
     
-    public void setFitaView(String fita) {
-     
+    public  static void setFitaView(String fitaAtualizada) {     
+
+        System.out.println(fitaAtualizada);
+
+                    
+        MaquinaDeTuringView.umjFormattedTextField1.setText("teste");        
+        MaquinaDeTuringView.doisjFormattedTextField3.setText("teste");
+        MaquinaDeTuringView.tresjFormattedTextField2.setText("teste");
+        MaquinaDeTuringView.quatrojFormattedTextField6.setText("teste");
+        MaquinaDeTuringView.cincojFormattedTextField5.setText("teste");
+        MaquinaDeTuringView.seisjFormattedTextField4.setText("teste");
+        MaquinaDeTuringView.setejFormattedTextField12.setText("teste");
+        MaquinaDeTuringView.oitojFormattedTextField8.setText("teste");
+        MaquinaDeTuringView.novejFormattedTextField7.setText("teste");
+        MaquinaDeTuringView.dezjFormattedTextField11.setText("teste");
+        MaquinaDeTuringView.dozejFormattedTextField9.setText("teste");
+        MaquinaDeTuringView.tresjFormattedTextField2.setText("teste");                                        
         
-        ArrayList<JFormattedTextField> lista = getListaFields();
-              
-        for (int i = 0; i < fita.length(); i++) {
-            
-            if (i < lista.size()) {
-                
-                System.out.println(i);
-                lista.get(i).setText(String.valueOf(fita.charAt(i)));
-                
-            }
-            
-        }
         
+        System.out.println(MaquinaDeTuringView.listaFieds.size());        
     }
     
     public void setHistoricoEstadosAcoes (String historico) {
@@ -695,6 +684,15 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         return tabelaDeAcao;
     }
     
+    public void atualiza() {
+        
+       /* for (int i = 0; i < MaquinaDeTuringView.fita.size(); i++) {
+            MaquinaDeTuringView.fita.get(i).setText("teste");
+        }
+        
+     */   
+    }
+    
     public String getFita() throws ExceptionTuring{
         
         
@@ -712,10 +710,10 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField cincojFormattedTextField5;
-    private javax.swing.JFormattedTextField dezjFormattedTextField11;
-    private javax.swing.JFormattedTextField doisjFormattedTextField3;
-    private javax.swing.JFormattedTextField dozejFormattedTextField9;
+    private static javax.swing.JFormattedTextField cincojFormattedTextField5;
+    private static javax.swing.JFormattedTextField dezjFormattedTextField11;
+    private static javax.swing.JFormattedTextField doisjFormattedTextField3;
+    private static javax.swing.JFormattedTextField dozejFormattedTextField9;
     private javax.swing.JTextField estadosjTextField3;
     private javax.swing.JButton executarFitajButton3;
     private javax.swing.JFormattedTextField fitajFormattedTextField15;
@@ -742,7 +740,6 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -751,18 +748,19 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton limparjButton2;
     private javax.swing.JTextField nonojTextField15;
-    private javax.swing.JFormattedTextField novejFormattedTextField7;
-    private javax.swing.JFormattedTextField oitojFormattedTextField8;
-    private javax.swing.JFormattedTextField onzejFormattedTextField10;
-    private javax.swing.JFormattedTextField quatrojFormattedTextField6;
+    private static javax.swing.JFormattedTextField novejFormattedTextField7;
+    private static javax.swing.JFormattedTextField oitojFormattedTextField8;
+    private static javax.swing.JFormattedTextField onzejFormattedTextField10;
+    private static javax.swing.JFormattedTextField quatrojFormattedTextField6;
     private javax.swing.JButton salvarjButton1;
-    private javax.swing.JFormattedTextField seisjFormattedTextField4;
-    private javax.swing.JFormattedTextField setejFormattedTextField12;
+    private static javax.swing.JFormattedTextField seisjFormattedTextField4;
+    private static javax.swing.JFormattedTextField setejFormattedTextField12;
     private javax.swing.JFormattedTextField simbolosjFormattedTextField1;
     private javax.swing.JTable tabelaDeAcao;
-    private javax.swing.JFormattedTextField tresjFormattedTextField2;
-    private javax.swing.JFormattedTextField trezejFormattedTextField14;
-    private javax.swing.JFormattedTextField umjFormattedTextField1;
+    private javax.swing.JPanel testeJPanel;
+    private static javax.swing.JFormattedTextField tresjFormattedTextField2;
+    private static javax.swing.JFormattedTextField trezejFormattedTextField14;
+    private static javax.swing.JFormattedTextField umjFormattedTextField1;
     // End of variables declaration//GEN-END:variables
 
 }
