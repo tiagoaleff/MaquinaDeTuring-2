@@ -6,7 +6,7 @@
 package br.maquinaDeTuring.model;
 
 import br.maquinaDeTuring.object.CelulaObject;
-import java.lang.reflect.Array;
+import br.maquinaDeTuring.view.MaquinaDeTuringView;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -20,13 +20,13 @@ public class MaquinaModel {
     private ArrayList<String> historicoEstados; // mostra de forma tabular as estados percorridos (q1, $) -> (d,D,4)
     private MatrizModel matrizAcoes;
     private int estadoAtual;
+    private MaquinaDeTuringView frame;
     
-    public MaquinaModel(MatrizModel matriz, String fita) {
+    public MaquinaModel(MatrizModel matriz, String fita, MaquinaDeTuringView frame) {
         matrizAcoes = matriz;        
         this.fita = fita;
-        estadoAtual = 0;             
-        
-        //this.fita  += "►";
+        estadoAtual = 0;                 
+        this.frame = frame;
     }
     
     
@@ -43,47 +43,69 @@ public class MaquinaModel {
         String auxilixarString = "";
         String direcaoString = "";
         int posicaoAtualFita = 0;
+        String historico = ""; // (estado lido, simbolo lido) -> (estado destino, simbolo gravado, direcao)
                
         while (!acao.isFimPrograma()) {        
-                                                  
+                                             
+            
             estadoAtual = acao.getEstadoDestino();
             novoSimboloString = acao.getSimbolo();
-            direcaoString = acao.getDirecao();               
+            direcaoString = acao.getDirecao();                           
                                    
             System.out.println("inicial: " + fita);
             System.out.println("estado atual: " + estadoAtual);
             System.out.println("novo simbolo: " + novoSimboloString);
             System.out.println("direcao: " + direcaoString);
             System.out.println("cabecote: " + posicaoAtualFita);
-                        
+            
+            int auxiliarPosicao = posicaoAtualFita; // para que seja possivel inserir no historico            
+            String auxiliarCaracterFita = getCaracterFita(posicaoAtualFita);
             getNovaFita(novoSimboloString, posicaoAtualFita); // atualiza a fita                                    
-            
+            setFitaView();
             System.out.println("valor da coluna: " + getCaracterFita(posicaoAtualFita) + " linha: " + estadoAtual);
-            
+                        
             posicaoAtualFita = getPosicao(acao.getDirecao(), posicaoAtualFita); // atualiza a variavel antes de obter na matriz
             acao = matrizAcoes.getAcao(getCaracterFita(posicaoAtualFita), estadoAtual); // obtem a nova acao                                    
-            System.out.println("final: " + fita);            
-           
+            System.out.println("final: " + fita);                       
+            setHistoricoEstadosView(auxiliarCaracterFita, posicaoAtualFita, acao.getEstadoDestino(), acao.getDirecao(), acao.isFimPrograma());
         }
         
-        System.out.println(fita);
-        JOptionPane.showMessageDialog(null, fita);
-        JOptionPane.showMessageDialog(null, "fim do programa");
         
+        JOptionPane.showMessageDialog(null, fita);        
+        
+    }
+    
+    
+    public void setHistoricoEstadosView(String auxiliarCaracterFita, int posicaoAtualFita, int novoEstado,
+            String novaDirecao, boolean fimDePrograma) {
+        
+        String historico = "";
+        
+        
+        historico = "( " + estadoAtual + ", " + auxiliarCaracterFita + ")"
+                + " = (" + novoEstado +", " + getCaracterFita(posicaoAtualFita) + ", "
+                + " " + novaDirecao + ")";
+        
+        if (fimDePrograma) {
+                        
+            historico = "( " + estadoAtual + ", " + auxiliarCaracterFita + ")"
+                + " = ( FIM DE PROGRAMA )";            
+        }
+        
+        
+        frame.setHistoricoEstadosAcoes(historico);
     }
     
     public String getCaracterFita (int posicaoAtualFita) {
         
         if (posicaoAtualFita >= fita.length() ) {
-        
-            System.out.println("Parou!");            
+                    
             JOptionPane.showMessageDialog(null, fita);
-            System.exit(0);            
             fita += "_";                         
         } 
         
         return String.valueOf(fita.charAt(posicaoAtualFita));   
-    }
+    }    
     
     public void getNovaFita(String novoSimboloString, int posicao) {
         
@@ -108,6 +130,10 @@ public class MaquinaModel {
             return ++posicao;
         }
         return --posicao;
+    }
+    
+    public void setFitaView () {
+        frame.setFitaView(fita);
     }
                   
 }

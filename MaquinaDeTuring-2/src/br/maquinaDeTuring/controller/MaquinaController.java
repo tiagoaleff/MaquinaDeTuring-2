@@ -76,9 +76,11 @@ public class MaquinaController implements ActionListener{
     public void executarFita () throws ExceptionTuring{
         
         fitaEntrada = frame.getFita();        
-        MaquinaModel maquina = new MaquinaModel(matrizDeAcao, fitaEntrada);
+        MaquinaModel maquina = new MaquinaModel(matrizDeAcao, fitaEntrada, frame);
         maquina.executarAnaliseEmFita();
                         
     }
+    
+    
     
 }

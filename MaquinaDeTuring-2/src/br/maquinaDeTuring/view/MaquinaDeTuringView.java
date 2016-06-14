@@ -9,11 +9,11 @@ import br.maquinaDeTuring.controller.CriaTabelaDeAcaoController;
 import br.maquinaDeTuring.controller.MaquinaController;
 import br.maquinaDeTuring.exception.ExceptionTuring;
 import br.maquinaDeTuring.object.MascaraCelulas;
-import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 /**
  *
@@ -87,7 +87,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        historicoEstadosjList1 = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -258,32 +258,49 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
             }
         });
 
-        try {
-            umjFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("A")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        umjFormattedTextField1.setEditable(false);
+        umjFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
+        tresjFormattedTextField2.setEditable(false);
+
+        doisjFormattedTextField3.setEditable(false);
         doisjFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doisjFormattedTextField3ActionPerformed(evt);
             }
         });
 
+        seisjFormattedTextField4.setEditable(false);
+
+        cincojFormattedTextField5.setEditable(false);
+
+        quatrojFormattedTextField6.setEditable(false);
         quatrojFormattedTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quatrojFormattedTextField6ActionPerformed(evt);
             }
         });
 
+        novejFormattedTextField7.setEditable(false);
         novejFormattedTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novejFormattedTextField7ActionPerformed(evt);
             }
         });
 
+        oitojFormattedTextField8.setEditable(false);
+
+        dozejFormattedTextField9.setEditable(false);
+
+        onzejFormattedTextField10.setEditable(false);
+
+        dezjFormattedTextField11.setEditable(false);
+
+        setejFormattedTextField12.setEditable(false);
+
         jFormattedTextField13.setText("jFormattedTextField1");
 
+        trezejFormattedTextField14.setEditable(false);
         trezejFormattedTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trezejFormattedTextField14ActionPerformed(evt);
@@ -313,12 +330,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
 
         jLabel4.setText("Diminuir:");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(historicoEstadosjList1);
 
         jLabel5.setText("Histórioco de Ações");
 
@@ -437,16 +449,15 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(executarFitajButton3)
                             .addComponent(jButton5)
                             .addComponent(jButton4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
@@ -472,7 +483,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Execução Fita", jPanel3);
@@ -625,7 +636,9 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         return valoesMascara;
     }
     
-    /*public ArrayList<JFormattedTextField> getListaFields () {
+    
+    
+    public ArrayList<JFormattedTextField> getListaFields () {
         ArrayList<JFormattedTextField> listaFieds = new ArrayList<>();
         
         listaFieds.add(umjFormattedTextField1);
@@ -643,19 +656,40 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
 
         
         return listaFieds;
-    }*/
+    }
     
-    public void set(String fita) {
+    public void setFitaView(String fita) {
+     
         
-        
+        ArrayList<JFormattedTextField> lista = getListaFields();
+              
         for (int i = 0; i < fita.length(); i++) {
             
-            
+            if (i < lista.size()) {
+                
+                System.out.println(i);
+                lista.get(i).setText(String.valueOf(fita.charAt(i)));
+                
+            }
             
         }
         
     }
     
+    public void setHistoricoEstadosAcoes (String historico) {
+                        
+        DefaultListModel<String> lista = new DefaultListModel<>();        
+        
+        String listaString = "";
+        
+        for (int i = 0; i < historicoEstadosjList1.getModel().getSize(); i ++) {
+            listaString = historicoEstadosjList1.getModel().getElementAt(i);   
+            lista.addElement(listaString);
+        }
+        
+        lista.addElement(historico);
+        historicoEstadosjList1.setModel(lista);        
+    }
     
     public JTable getTabelaDeAcao() {
         return tabelaDeAcao;
@@ -685,6 +719,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private javax.swing.JTextField estadosjTextField3;
     private javax.swing.JButton executarFitajButton3;
     private javax.swing.JFormattedTextField fitajFormattedTextField15;
+    private javax.swing.JList<String> historicoEstadosjList1;
     private javax.swing.JButton inserirTabelaSimbolosjButton2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
@@ -699,7 +734,6 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

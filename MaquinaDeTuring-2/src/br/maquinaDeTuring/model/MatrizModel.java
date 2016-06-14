@@ -104,17 +104,17 @@ public class MatrizModel {
             
         }*/
         
-        if (estado == 1 && coluna == 2){
+        /*if (estado == 1 && coluna == 2){
             System.out.println("fim do programa");
             System.exit(0);
-        }
+        }*/
         
         
         if (coluna == -1) {
             JOptionPane.showMessageDialog(null, "nao foi encontrado o simbolo: " + simboloEntrada + " na matriz");
             return celula;
         }       
-        celula = matrizDeAcoes[estado][coluna].getCelula();        
+        celula = matrizDeAcoes[estado][coluna].getCelula();                                        
         return celula;
     }
     
