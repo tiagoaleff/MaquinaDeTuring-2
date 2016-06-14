@@ -11,6 +11,7 @@ import br.maquinaDeTuring.exception.ExceptionTuring;
 import br.maquinaDeTuring.object.MascaraCelulas;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -263,46 +264,26 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        tresjFormattedTextField2.setText("jFormattedTextField1");
-
-        doisjFormattedTextField3.setText("jFormattedTextField1");
         doisjFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doisjFormattedTextField3ActionPerformed(evt);
             }
         });
 
-        seisjFormattedTextField4.setText("jFormattedTextField1");
-
-        cincojFormattedTextField5.setText("jFormattedTextField1");
-
-        quatrojFormattedTextField6.setText("jFormattedTextField1");
         quatrojFormattedTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quatrojFormattedTextField6ActionPerformed(evt);
             }
         });
 
-        novejFormattedTextField7.setText("jFormattedTextField1");
         novejFormattedTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 novejFormattedTextField7ActionPerformed(evt);
             }
         });
 
-        oitojFormattedTextField8.setText("jFormattedTextField1");
-
-        dozejFormattedTextField9.setText("jFormattedTextField1");
-
-        onzejFormattedTextField10.setText("jFormattedTextField1");
-
-        dezjFormattedTextField11.setText("jFormattedTextField1");
-
-        setejFormattedTextField12.setText("jFormattedTextField1");
-
         jFormattedTextField13.setText("jFormattedTextField1");
 
-        trezejFormattedTextField14.setText("jFormattedTextField1");
         trezejFormattedTextField14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 trezejFormattedTextField14ActionPerformed(evt);
@@ -643,6 +624,38 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         
         return valoesMascara;
     }
+    
+    /*public ArrayList<JFormattedTextField> getListaFields () {
+        ArrayList<JFormattedTextField> listaFieds = new ArrayList<>();
+        
+        listaFieds.add(umjFormattedTextField1);
+        listaFieds.add(doisjFormattedTextField3);
+        listaFieds.add(tresjFormattedTextField2);
+        listaFieds.add(quatrojFormattedTextField6);
+        listaFieds.add(cincojFormattedTextField5);
+        listaFieds.add(seisjFormattedTextField4);
+        listaFieds.add(setejFormattedTextField12);
+        listaFieds.add(oitojFormattedTextField8);
+        listaFieds.add(novejFormattedTextField7);
+        listaFieds.add(dezjFormattedTextField11);
+        listaFieds.add(dozejFormattedTextField9);
+        listaFieds.add(tresjFormattedTextField2);
+
+        
+        return listaFieds;
+    }*/
+    
+    public void set(String fita) {
+        
+        
+        for (int i = 0; i < fita.length(); i++) {
+            
+            
+            
+        }
+        
+    }
+    
     
     public JTable getTabelaDeAcao() {
         return tabelaDeAcao;

@@ -63,7 +63,7 @@ public class MaquinaController implements ActionListener{
         matrizDeAcao = new MatrizModel(frame.getCampos(), frame.getEstados());
         matrizDeAcao.setMatrizAcoes(frame.getTabelaDeAcao());
         
-        System.out.println(matrizDeAcao.toString());
+        //System.out.println(matrizDeAcao.toString());
         
     }
     

@@ -125,11 +125,23 @@ public class CriaTabelaDeAcaoController implements ActionListener{
                             return false;                                
                         }
                                                 
+                        if (row == 0) {
+                            return false;                                
+                        }
+                        
                         return true;
                     }        
                     
                     
                 };
+        
+        for (int j = 0; j < defaultTable.getColumnCount(); j++) {
+            
+            defaultTable.setValueAt("0", 0, 2);
+            defaultTable.setValueAt("►", 0, 3);
+            defaultTable.setValueAt("Direita", 0, 4);
+            
+        }
         
         frame.getTabelaDeAcao().setModel(defaultTable);
         formatCell(simbolos);
@@ -155,8 +167,7 @@ public class CriaTabelaDeAcaoController implements ActionListener{
         String [] direcaoString = {"Direita", "Esquerda"};        
         JComboBox leituraEscrita = new JComboBox(simbolos);
         JComboBox direcao = new JComboBox(direcaoString);
-        JComboBox estados;
-        
+        JComboBox estados;        
         
         // configura o estado destino
         String [] numeroDeEstadosArray = new String[numeroDeEstados + 1];
@@ -173,13 +184,11 @@ public class CriaTabelaDeAcaoController implements ActionListener{
         int j = 0;
         int x = 0;
         int numeroDeEstado = 0;
-        for (int i = 0; i < row; i++) {         
-            
+        for (int i = 0; i < row; i++) {                     
             
             tabelaEstados.setValueAt(numeroDeEstado, i, 0); // configura o numero do estado
             tabelaEstados.setValueAt(simbolos[x], i, 1);
-            
-            System.out.println(numeroDeEstado);
+                        
             j++;  
             if ( j == numeroDeColunas){
                 numeroDeEstado++;
@@ -197,7 +206,7 @@ public class CriaTabelaDeAcaoController implements ActionListener{
             
             TableColumn col = tabelaEstados.getColumnModel().getColumn(i);                                                
             
-             if (i == 2) {
+             if (i == 2) {                
                 col.setCellEditor(new DefaultCellEditor(estados));  
             }
             if (i == 3) {
@@ -218,7 +227,7 @@ public class CriaTabelaDeAcaoController implements ActionListener{
             tabelaEstados.setRowHeight(i, 35);
             
         }
-         
+                 
     }
     
 }

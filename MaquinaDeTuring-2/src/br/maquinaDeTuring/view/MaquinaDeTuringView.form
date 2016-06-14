@@ -580,68 +580,35 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="tresjFormattedTextField2">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="doisjFormattedTextField3">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doisjFormattedTextField3ActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="seisjFormattedTextField4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="cincojFormattedTextField5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="quatrojFormattedTextField6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quatrojFormattedTextField6ActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="novejFormattedTextField7">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="novejFormattedTextField7ActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="oitojFormattedTextField8">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="dozejFormattedTextField9">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="onzejFormattedTextField10">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="dezjFormattedTextField11">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="setejFormattedTextField12">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField13">
                   <Properties>
@@ -649,9 +616,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JFormattedTextField" name="trezejFormattedTextField14">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="trezejFormattedTextField14ActionPerformed"/>
                   </Events>

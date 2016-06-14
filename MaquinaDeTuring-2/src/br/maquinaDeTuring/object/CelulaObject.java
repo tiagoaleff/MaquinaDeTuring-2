@@ -32,7 +32,7 @@ public class CelulaObject {
 
     public void setSimbolo(String simbolo) {
                 
-        if (simbolo == null) {
+        if (simbolo == null || simbolo.trim().equals("")) {
             return;
         }
         this.simbolo = simbolo;                    
@@ -41,13 +41,12 @@ public class CelulaObject {
 
     public int getEstadoDestino() {
         
-        if (estadoDestino == null || estadoDestino.trim().equals(""))     
+        if (estadoDestino == null || estadoDestino.trim().equals("") || estadoDestino.equals("null")) {
             return 0;
-        
+        }                    
         if (isFimPrograma()) {
             return 0;
-        }
-        
+        }                
         return Integer.parseInt(estadoDestino);        
     }
 
@@ -69,8 +68,7 @@ public class CelulaObject {
         return direcao;
     }
 
-    public void setDirecao(String direcao) {
-                
+    public void setDirecao(String direcao) {                        
         this.direcao = direcao;
     }
     

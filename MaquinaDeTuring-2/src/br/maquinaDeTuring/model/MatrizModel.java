@@ -46,21 +46,15 @@ public class MatrizModel {
         for (int i = 0; i < linhas; i++) {
             
             for (int j = 0; j < colunas; j++) {
-                                
-                /*celula.setEstadoDestino("");
-                celula.setDirecao("");
-                celula.setSimbolo("");                
-                matrizDeAcoes[linhaMatriz][colunaMatriz] = celula;                       
-                */
-                if (j == 2) {                    
-                    celula.setEstadoDestino(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));                    
-                }
-                
-                if (j == 3) {
-                    
+
+                if (j == 3) {                   
                     celula.setSimbolo(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));
                 }
                 
+                if (j == 2) {                                   
+                    celula.setEstadoDestino(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));                    
+                }
+                                                
                 if (j == 4) {
                     
                     celula.setDirecao(String.valueOf(tabelaDeAcoes.getValueAt(i, j)));                    
@@ -82,25 +76,44 @@ public class MatrizModel {
                 }                                   
             }
         }                                                              
+        
+        System.out.println(matrizDeAcoes.toString());
     }
     
     public CelulaObject getAcao (String simboloEntrada, int estado) {
         
-        CelulaObject celula = new CelulaObject();        
-        listaSimbolos.add(0, "►");
-        int coluna = listaSimbolos.indexOf(simboloEntrada);
+        if (!listaSimbolos.get(0).equals("►")) {
+            listaSimbolos.add(0, "►");            
+        }
+        
+        CelulaObject celula = new CelulaObject();                
+        int coluna = listaSimbolos.indexOf(simboloEntrada);                        
+        
+        for (String i : listaSimbolos) {
+            //System.out.println(i);
+        }
         
         /*for (String i : listaSimbolos) {            
             System.out.println(i);
         }*/
                                         
-        if (matrizDeAcoes[estado][coluna] == null) {
+        /*if (matrizDeAcoes[estado][coluna] == null) {
             
             System.out.println("Posicao nao existe");
             System.exit(0);
             
+        }*/
+        
+        if (estado == 1 && coluna == 2){
+            System.out.println("fim do programa");
+            System.exit(0);
         }
-                
+        
+        
+        if (coluna == -1) {
+            JOptionPane.showMessageDialog(null, "nao foi encontrado o simbolo: " + simboloEntrada + " na matriz");
+            return celula;
+        }       
         celula = matrizDeAcoes[estado][coluna].getCelula();        
         return celula;
     }

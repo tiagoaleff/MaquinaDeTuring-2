@@ -32,35 +32,60 @@ public class MaquinaModel {
     
     public void executarAnaliseEmFita() {
         
-        CelulaObject acao;        
-        boolean fimDePrograma = true;
-        int posicaoAtualFita = 0;
-                       
+        CelulaObject acao = new CelulaObject();        
+        boolean fimDePrograma = true;        
+        
+        System.out.println(matrizAcoes.toString());
+        
         acao = matrizAcoes.getAcao(String.valueOf(fita.charAt(0)), estadoAtual);        
-                
+                        
         String novoSimboloString = "";
         String auxilixarString = "";
-        
-        while (fimDePrograma) {        
-                        
-            if (acao.isFimPrograma()) {
-                fimDePrograma = false;
-                System.out.println("fim do programa");
-                break;
-            }
+        String direcaoString = "";
+        int posicaoAtualFita = 0;
+               
+        while (!acao.isFimPrograma()) {        
+                                                  
+            estadoAtual = acao.getEstadoDestino();
             novoSimboloString = acao.getSimbolo();
-            estadoAtual = acao.getEstadoDestino();            
-            fita = getNovaFita(novoSimboloString, posicaoAtualFita);                                    
-            posicaoAtualFita = getPosicao(acao.getDirecao(), posicaoAtualFita);                        
-                                                                     
+            direcaoString = acao.getDirecao();               
+                                   
+            System.out.println("inicial: " + fita);
+            System.out.println("estado atual: " + estadoAtual);
+            System.out.println("novo simbolo: " + novoSimboloString);
+            System.out.println("direcao: " + direcaoString);
+            System.out.println("cabecote: " + posicaoAtualFita);
+                        
+            getNovaFita(novoSimboloString, posicaoAtualFita); // atualiza a fita                                    
+            
+            System.out.println("valor da coluna: " + getCaracterFita(posicaoAtualFita) + " linha: " + estadoAtual);
+            
+            posicaoAtualFita = getPosicao(acao.getDirecao(), posicaoAtualFita); // atualiza a variavel antes de obter na matriz
+            acao = matrizAcoes.getAcao(getCaracterFita(posicaoAtualFita), estadoAtual); // obtem a nova acao                                    
+            System.out.println("final: " + fita);            
+           
         }
         
         System.out.println(fita);
+        JOptionPane.showMessageDialog(null, fita);
         JOptionPane.showMessageDialog(null, "fim do programa");
         
     }
     
-    public String getNovaFita(String novoSimboloString, int posicao) {
+    public String getCaracterFita (int posicaoAtualFita) {
+        
+        if (posicaoAtualFita >= fita.length() ) {
+        
+            System.out.println("Parou!");            
+            JOptionPane.showMessageDialog(null, fita);
+            System.exit(0);            
+            fita += "_";                         
+        } 
+        
+        return String.valueOf(fita.charAt(posicaoAtualFita));   
+    }
+    
+    public void getNovaFita(String novoSimboloString, int posicao) {
         
         String auxiliar = "";
         
@@ -74,7 +99,7 @@ public class MaquinaModel {
                         
         }
         
-        return auxiliar;        
+        fita = auxiliar;
     }
                     
     public int getPosicao(String direcao, int posicao) {
