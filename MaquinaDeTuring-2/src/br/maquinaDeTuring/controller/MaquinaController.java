@@ -11,6 +11,8 @@ import br.maquinaDeTuring.model.MaquinaModel;
 import br.maquinaDeTuring.view.MaquinaDeTuringView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,15 +37,12 @@ public class MaquinaController implements ActionListener{
         
         switch (action) {
             
-            case "salvarTabela":
-                
+            case "salvarTabela":                        
                 try {
                     salvarMatrizDeAcao();
-                    
                 } catch (ExceptionTuring ex) {
-                    JOptionPane.showMessageDialog(frame, ex.getMessage());
-                }
-                
+                    Logger.getLogger(MaquinaController.class.getName()).log(Level.SEVERE, null, ex);
+                }                        
             break;
                  case "ExecutarFita":
 
@@ -62,9 +61,7 @@ public class MaquinaController implements ActionListener{
     private void salvarMatrizDeAcao () throws ExceptionTuring {
         
         matrizDeAcao = new MatrizModel(frame.getCampos(), frame.getEstados());
-        matrizDeAcao.setMatrizAcoes(frame.getTabelaDeAcao());
-        
-        //System.out.println(matrizDeAcao.toString());
+        matrizDeAcao.setMatrizAcoes(frame.getTabelaDeAcao());        
         
     }
     
@@ -72,12 +69,10 @@ public class MaquinaController implements ActionListener{
         salvarMatrizDeAcao();
     }    
     
-    public synchronized void executarFita () throws ExceptionTuring {        
+    public  void executarFita () throws ExceptionTuring {        
         fitaEntrada = frame.getFita();        
         maquina = new MaquinaModel(matrizDeAcao, fitaEntrada, frame);                               
         maquina.run();
         
-    }        
-    
-    
+    }            
 }

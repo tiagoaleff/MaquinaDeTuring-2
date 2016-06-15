@@ -5,7 +5,6 @@
  */
 package br.maquinaDeTuring.view;
 
-import br.maquinaDeTuring.thread.Temporizador;
 import br.maquinaDeTuring.controller.CriaTabelaDeAcaoController;
 import br.maquinaDeTuring.controller.MaquinaController;
 import br.maquinaDeTuring.exception.ExceptionTuring;
@@ -13,6 +12,7 @@ import br.maquinaDeTuring.object.MascaraCelulas;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -262,31 +262,7 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
 
         umjFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
-        doisjFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doisjFormattedTextField3ActionPerformed(evt);
-            }
-        });
-
-        quatrojFormattedTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quatrojFormattedTextField6ActionPerformed(evt);
-            }
-        });
-
-        novejFormattedTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                novejFormattedTextField7ActionPerformed(evt);
-            }
-        });
-
         jFormattedTextField13.setText("jFormattedTextField1");
-
-        trezejFormattedTextField14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trezejFormattedTextField14ActionPerformed(evt);
-            }
-        });
 
         fitajFormattedTextField15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -515,14 +491,6 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fitajFormattedTextField15ActionPerformed
 
-    private void trezejFormattedTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trezejFormattedTextField14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_trezejFormattedTextField14ActionPerformed
-
-    private void novejFormattedTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novejFormattedTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_novejFormattedTextField7ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -530,14 +498,6 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void quatrojFormattedTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quatrojFormattedTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quatrojFormattedTextField6ActionPerformed
-
-    private void doisjFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doisjFormattedTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_doisjFormattedTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -643,24 +603,13 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         
     }
     
-    public  static void setFitaView(String fitaAtualizada) {     
+    public synchronized static void setFitaView(String fitaAtualizada) {     
 
         System.out.println(fitaAtualizada);
 
-                    
-        MaquinaDeTuringView.umjFormattedTextField1.setText("teste");        
-        MaquinaDeTuringView.doisjFormattedTextField3.setText("teste");
-        MaquinaDeTuringView.tresjFormattedTextField2.setText("teste");
-        MaquinaDeTuringView.quatrojFormattedTextField6.setText("teste");
-        MaquinaDeTuringView.cincojFormattedTextField5.setText("teste");
-        MaquinaDeTuringView.seisjFormattedTextField4.setText("teste");
-        MaquinaDeTuringView.setejFormattedTextField12.setText("teste");
-        MaquinaDeTuringView.oitojFormattedTextField8.setText("teste");
-        MaquinaDeTuringView.novejFormattedTextField7.setText("teste");
-        MaquinaDeTuringView.dezjFormattedTextField11.setText("teste");
-        MaquinaDeTuringView.dozejFormattedTextField9.setText("teste");
-        MaquinaDeTuringView.tresjFormattedTextField2.setText("teste");                                        
-        
+        for (int i = 0; i < fitaAtualizada.length(); i++) {
+            MaquinaDeTuringView.listaFieds.get(i).setText(String.valueOf(fitaAtualizada.charAt(i)));                       
+        }
         
         System.out.println(MaquinaDeTuringView.listaFieds.size());        
     }
@@ -697,6 +646,8 @@ public class MaquinaDeTuringView extends javax.swing.JFrame {
         
         
         String fita = fitajFormattedTextField15.getText();
+        
+        JOptionPane.showMessageDialog(this, fita);
         
         if (fita.equals("") || fita == null) {
             

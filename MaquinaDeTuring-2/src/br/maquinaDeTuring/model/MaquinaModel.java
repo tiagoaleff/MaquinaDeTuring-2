@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author tiagoaleff
  */
-public class MaquinaModel implements Runnable{
+public class MaquinaModel {
     
     private String fita; // fita inserida pelo usuario
     private ArrayList<String> historicoEstados; // mostra de forma tabular as estados percorridos (q1, $) -> (d,D,4)
@@ -32,7 +32,6 @@ public class MaquinaModel implements Runnable{
     }
     
     
-    @Override
     public void run() {
      
         try {
@@ -44,7 +43,7 @@ public class MaquinaModel implements Runnable{
     }
     
     
-    public synchronized void executarAnaliseEmFita() throws InterruptedException {
+    public void executarAnaliseEmFita() throws InterruptedException {
                             
         CelulaObject acao = new CelulaObject();        
         boolean fimDePrograma = true;        
@@ -64,8 +63,7 @@ public class MaquinaModel implements Runnable{
         }        
                 
         while (!acao.isFimPrograma()) {        
-                                             
-            
+                                                         
             estadoAtual = acao.getEstadoDestino();
             novoSimboloString = acao.getSimbolo();
             direcaoString = acao.getDirecao();                           
@@ -90,8 +88,7 @@ public class MaquinaModel implements Runnable{
             setHistoricoEstadosView(auxiliarCaracterFita, posicaoAtualFita, acao.getEstadoDestino(), acao.getDirecao(), acao.isFimPrograma());
             
             try {                                
-                Thread.sleep(3 * 1000);    
-                frame.repaint();
+                Thread.sleep(3 * 1000);                   
             } catch (InterruptedException e) {
                 throw new InterruptedException();
             }
@@ -165,7 +162,7 @@ public class MaquinaModel implements Runnable{
         MaquinaDeTuringView.setFitaView(fita);
     }
     
-    public synchronized void setFitaView () {     
+    public void setFitaView () {     
         
         MaquinaDeTuringView.setFitaView(fita);
     }
